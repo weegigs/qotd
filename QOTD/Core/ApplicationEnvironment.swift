@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-typealias ApplicationEnvironment = QuoteServiceContainer
+typealias ApplicationEnvironment = QuoteServiceContainer & ImageServiceContainer
 
 enum ApplicationEnvironments {
   case live
@@ -34,5 +34,6 @@ enum ApplicationEnvironments {
 }
 
 private struct LiveEnvironment: ApplicationEnvironment {
+  let imageService: ImageService = URLSessionImageService()
   let quotes: QuoteService = TheySaidQuoteService()
 }

@@ -21,24 +21,44 @@
 // SOFTWARE.
 
 import Combine
+import Foundation
 import UIKit
 
-enum ImageCommands {
-  static func load(location: String) -> ApplicationCommand {
-    var task: Cancellable?
+protocol ImageServiceContainer {
+  var imageService: ImageService { get }
+}
 
-    return ApplicationCommand { environment, publish in
-      publish(ImageMessage.loading(location: location))
-      task = environment.imageService.load(url: location) { result in
-        switch result {
-        case let .success(image):
-          publish(ImageMessage.loaded(location: location, image: image))
-        case let .failure(error):
-          publish(ImageMessage.failed(location: location, message: error.description))
-        }
+enum ImageServiceError: Error, CustomStringConvertible {
+  case unknownError(error: Error)
+  case internalError(message: String)
+  case invalidURL(url: String)
+  case invalidResponse(message: String)
 
-        task?.cancel()
-      }
+  var description: String {
+    switch self {
+    case let .unknownError(error):
+      return error.localizedDescription
+    case let .internalError(message):
+      return "internal error: \(message)"
+    case let .invalidURL(url):
+      return "invalid url: \(url)"
+    case let .invalidResponse(message):
+      return "invalid response: \(message)"
     }
+  }
+}
+
+protocol ImageService {
+  func load(url: URL, forfil: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable
+}
+
+extension ImageService {
+  func load(url location: String, forfil: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
+    guard let url = URL(string: location) else {
+      forfil(.failure(.invalidURL(url: location)))
+      return AnyCancellable {}
+    }
+
+    return load(url: url, forfil: forfil)
   }
 }
