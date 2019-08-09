@@ -25,20 +25,16 @@ import UIKit
 
 enum ImageCommands {
   static func load(location: String) -> ApplicationCommand {
-    var task: Cancellable?
-
     return ApplicationCommand { environment, publish in
-      publish(ImageMessage.loading(location: location))
-      task = environment.imageService.load(url: location) { result in
+      let task = environment.imageService.load(url: location) { result in
         switch result {
         case let .success(image):
           publish(ImageMessage.loaded(location: location, image: image))
         case let .failure(error):
           publish(ImageMessage.failed(location: location, message: error.description))
         }
-
-        task?.cancel()
       }
+      publish(ImageMessage.loading(location: location, task: task))
     }
   }
 }

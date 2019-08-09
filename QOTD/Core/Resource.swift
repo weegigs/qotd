@@ -20,10 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
+
 enum Resource<T> {
   case placeholder
-  case loading
-  case failed(String)
+  case loading(task: Cancellable)
+  case failed(message: String)
   case available(T)
 }
 
@@ -66,11 +68,11 @@ extension Resource {
   func map<U>(mapper: (T) -> U) -> Resource<U> {
     switch self {
     case let .failed(message):
-      return .failed(message)
+      return .failed(message: message)
     case .placeholder:
       return .placeholder
-    case .loading:
-      return .loading
+    case let .loading(task):
+      return .loading(task: task)
     case let .available(value):
       return .available(mapper(value))
     }
@@ -79,13 +81,38 @@ extension Resource {
   func flatMap<U>(mapper: (T) -> Resource<U>) -> Resource<U> {
     switch self {
     case let .failed(message):
-      return .failed(message)
+      return .failed(message: message)
     case .placeholder:
       return .placeholder
-    case .loading:
-      return .loading
+    case let .loading(task):
+      return .loading(task: task)
     case let .available(value):
       return mapper(value)
+    }
+  }
+}
+
+extension Resource {}
+
+extension Resource {
+  func on(
+    placeholder: () -> Void = {},
+    loading: () -> Void = {},
+    failed: (String) -> Void = { _ in },
+    available: (T) -> Void = { _ in }
+
+  ) {
+    switch self {
+    case .placeholder:
+      placeholder()
+    // KAO: I don't pass the task here to prevent the temptation of
+    // using in views
+    case .loading:
+      loading()
+    case let .failed(message):
+      failed(message)
+    case let .available(value):
+      available(value)
     }
   }
 }

@@ -20,14 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import WeeDux
 
 enum QuoteMessage: ApplicationMessage {
-  case categoriesLoading
+  case categoriesLoading(task: Cancellable)
+  case categoriesLoadingCancelled
   case categoriesLoadingFailed(error: QuoteServiceError)
   case categoriesLoaded(categories: [QuoteCategory])
 
-  case quoteLoading(category: String)
+  case quoteLoading(category: String, task: Cancellable)
+  case quoteLoadingCancelled(category: String)
   case quoteLoadingFailed(category: String, error: QuoteServiceError)
   case quoteLoaded(category: String, quote: Quote)
 }
@@ -35,10 +38,25 @@ enum QuoteMessage: ApplicationMessage {
 private let categoriesLoading = ApplicationReducer(path: \.categories) { state, message in
   guard
     let message = message as? QuoteMessage,
-    case .categoriesLoading = message
+    case let .categoriesLoading(task) = message
   else { return }
 
-  state = .loading
+  state = .loading(task: task)
+}
+
+private let categoriesLoadingCancelled = ApplicationReducer(path: \.categories) { state, message in
+  guard
+    let message = message as? QuoteMessage,
+    case .categoriesLoadingCancelled = message
+  else { return }
+
+  switch state {
+  case let .loading(task):
+    task.cancel()
+    state = .placeholder
+  default:
+    break
+  }
 }
 
 private let categoriesLoadingFailed = ApplicationReducer(path: \.categories) { state, message in
@@ -47,7 +65,7 @@ private let categoriesLoadingFailed = ApplicationReducer(path: \.categories) { s
     case let .categoriesLoadingFailed(error) = message
   else { return }
 
-  state = .failed(error.description)
+  state = .failed(message: error.description)
 }
 
 private let categoriesLoaded = ApplicationReducer(path: \.categories) { state, message in
@@ -62,10 +80,26 @@ private let categoriesLoaded = ApplicationReducer(path: \.categories) { state, m
 private let quoteLoading = ApplicationReducer(path: \.quotes) { state, message in
   guard
     let message = message as? QuoteMessage,
-    case let .quoteLoading(category) = message
+    case let .quoteLoading(category, task) = message
   else { return }
 
-  state[category] = .loading
+  state[category] = .loading(task: task)
+}
+
+private let quoteLoadingCancelled = ApplicationReducer(path: \.quotes) { state, message in
+  guard
+    let message = message as? QuoteMessage,
+    case let .quoteLoadingCancelled(category) = message,
+    let resource = state[category]
+  else { return }
+
+  switch resource {
+  case let .loading(task):
+    task.cancel()
+    state[category] = .placeholder
+  default:
+    break
+  }
 }
 
 private let quoteLoadingFailed = ApplicationReducer(path: \.quotes) { state, message in
@@ -74,7 +108,7 @@ private let quoteLoadingFailed = ApplicationReducer(path: \.quotes) { state, mes
     case let .quoteLoadingFailed(category, error) = message
   else { return }
 
-  state[category] = .failed(error.description)
+  state[category] = .failed(message: error.description)
 }
 
 private let quoteLoaded = ApplicationReducer(path: \.quotes) { state, message in
@@ -87,6 +121,6 @@ private let quoteLoaded = ApplicationReducer(path: \.quotes) { state, message in
 }
 
 let quoteMessageHandler = ApplicationMessageHandler(
-  reducer: categoriesLoading <> categoriesLoadingFailed <> categoriesLoaded
-    <> quoteLoading <> quoteLoadingFailed <> quoteLoaded
+  reducer: categoriesLoading <> categoriesLoadingCancelled <> categoriesLoadingFailed <> categoriesLoaded
+    <> quoteLoading <> quoteLoadingCancelled <> quoteLoadingFailed <> quoteLoaded
 )

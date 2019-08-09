@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Foundation
 import WeeDux
 
 protocol ApplicationMessage {}
@@ -28,13 +29,6 @@ typealias ApplicationMessageHandler = MessageHandler<ApplicationEnvironment, App
 typealias ApplicationReducer = Reducer<ApplicationModel, ApplicationMessage>
 
 func createApplicationMessageHandler() -> ApplicationMessageHandler {
-  return quoteMessageHandler <> imageMessageHandler <> logger
+  return quoteMessageHandler <> imageMessageHandler
 }
 
-enum SystemMessage: ApplicationMessage {
-  case failure(error: Error)
-}
-
-private let logger = ApplicationReducer(path: \.cache.log) { log, message in
-  log.append(message)
-}

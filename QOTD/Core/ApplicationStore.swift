@@ -25,6 +25,7 @@ import WeeDux
 
 typealias ApplicationStore = Store<ApplicationEnvironment, ApplicationModel, ApplicationMessage>
 typealias ApplicationProgram = Program<ApplicationEnvironment, ApplicationModel, ApplicationMessage>
+typealias ApplicationMiddleware = Middleware<ApplicationEnvironment, ApplicationModel, ApplicationMessage>
 
 extension Store where Environment == ApplicationEnvironment, Model == ApplicationModel, Message == ApplicationMessage {
   convenience init() {
@@ -37,7 +38,7 @@ extension Program where Environment == ApplicationEnvironment, State == Applicat
     self.init(
       initial: ApplicationModel(),
       environment: environment.create(),
-      middleware: [],
+      middleware: [Logger],
       handler: createApplicationMessageHandler()
     )
   }

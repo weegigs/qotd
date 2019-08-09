@@ -26,7 +26,7 @@ struct QuoteViewBody: View {
   let model: QuoteView.ViewModel
 
   var body: some View {
-    ResourcePanel(model.status) { quote in
+    ResourcePanel(model.resource) { quote in
       VStack(alignment: .leading) {
         Spacer()
         CardView {
@@ -57,6 +57,9 @@ struct QuoteViewBody: View {
       }
     )
     .edgesIgnoringSafeArea(.all)
+    .onDisappear {
+      self.model.dismissed()
+    }
   }
 }
 
@@ -116,28 +119,36 @@ struct QuoteView: View {
       }
     }
 
+    func dismissed() {
+      guard let quote = quotes[category.id] else {
+        return
+      }
+
+      quote.on(
+        loading: { dispatcher.send(QuoteMessage.quoteLoadingCancelled(category: category.id)) }
+      )
+
+      quote
+        .flatMap {
+          .available(ImageMessage.cancelled(location: $0.background))
+        }
+        .on(
+          available: { dispatcher.send($0) }
+        )
+    }
+
     var background: Resource<UIImage> {
-      status.flatMap { quote in
+      resource.flatMap { quote in
         images[quote.background] ?? .placeholder
       }
     }
 
-    var status: Resource<Quote> {
+    var resource: Resource<Quote> {
       quotes[category.id] ?? .placeholder
     }
 
     var title: String {
       category.title
-    }
-
-    var quote: Quote? {
-      guard let status = quotes[category.id],
-        case let .available(quote) = status
-      else {
-        return nil
-      }
-
-      return quote
     }
   }
 }

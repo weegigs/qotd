@@ -24,36 +24,30 @@ import Combine
 
 enum QuoteCommands {
   static let refreshCategories = ApplicationCommand { environment, publish in
-    var cancelable: Cancellable?
 
-    publish(QuoteMessage.categoriesLoading)
-    cancelable = environment.quotes.categories { result in
+    let task = environment.quotes.categories { result in
       switch result {
       case let .failure(error):
         publish(QuoteMessage.categoriesLoadingFailed(error: error))
       case let .success(categories):
         publish(QuoteMessage.categoriesLoaded(categories: categories))
       }
-
-      cancelable?.cancel()
     }
+    publish(QuoteMessage.categoriesLoading(task: task))
   }
 
   static let refreshQOD = { (category: String) -> ApplicationCommand in
     ApplicationCommand { environment, publish in
-      var cancelable: Cancellable?
-
-      publish(QuoteMessage.quoteLoading(category: category))
-      cancelable = environment.quotes.qod(category: category) { result in
+      let task = environment.quotes.qod(category: category) { result in
         switch result {
         case let .failure(error):
           publish(QuoteMessage.quoteLoadingFailed(category: category, error: error))
         case let .success(quote):
           publish(QuoteMessage.quoteLoaded(category: category, quote: quote))
         }
-
-        cancelable?.cancel()
       }
+
+      publish(QuoteMessage.quoteLoading(category: category, task: task))
     }
   }
 }

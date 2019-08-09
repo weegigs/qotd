@@ -20,11 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import Combine
 import UIKit
 import WeeDux
 
 enum ImageMessage: ApplicationMessage {
-  case loading(location: String)
+  case loading(location: String, task: Cancellable)
+  case cancelled(location: String)
   case loaded(location: String, image: UIImage)
   case failed(location: String, message: String)
 }
@@ -32,10 +34,26 @@ enum ImageMessage: ApplicationMessage {
 private let loading = ApplicationReducer(path: \.cache.images) { state, message in
   guard
     let message = message as? ImageMessage,
-    case let .loading(location) = message
+    case let .loading(location, task) = message
   else { return }
 
-  state[location] = .loading
+  state[location] = .loading(task: task)
+}
+
+private let cancelled = ApplicationReducer(path: \.cache.images) { state, message in
+  guard
+    let message = message as? ImageMessage,
+    case let .cancelled(location) = message,
+    let resource = state[location]
+  else { return }
+
+  switch resource {
+  case let .loading(task):
+    task.cancel()
+    state[location] = .placeholder
+  default:
+    break
+  }
 }
 
 private let loaded = ApplicationReducer(path: \.cache.images) { state, message in
@@ -53,7 +71,7 @@ private let failed = ApplicationReducer(path: \.cache.images) { state, message i
     case let .failed(location, details) = message
   else { return }
 
-  state[location] = .failed(details)
+  state[location] = .failed(message: details)
 }
 
-let imageMessageHandler = ApplicationMessageHandler(reducer: loading <> loaded <> failed)
+let imageMessageHandler = ApplicationMessageHandler(reducer: loading <> cancelled <> loaded <> failed)
