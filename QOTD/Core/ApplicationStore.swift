@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import WeeDux
 import SwifTEA
+import WeeDux
 
 typealias ApplicationStore = Store<ApplicationEnvironment, ApplicationModel, ApplicationMessage>
 typealias ApplicationProgram = Program<ApplicationEnvironment, ApplicationModel, ApplicationMessage>

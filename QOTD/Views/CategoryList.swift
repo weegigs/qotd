@@ -43,7 +43,7 @@ struct CategoryListBody: View {
 struct CategoryList: View {
   struct ViewModel {
     private let dispatcher: ApplicationStore.Dispatcher
-    
+
     let categories: ApplicationModel.Categories
     func refresh(force _: Bool = false) {
       dispatcher.send(QuoteCommands.refreshCategories)

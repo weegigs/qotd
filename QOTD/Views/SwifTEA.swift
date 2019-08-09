@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwiftUI
 import SwifTEA
+import SwiftUI
 
 typealias ApplicationStoreContainer<Content> = StoreContainer<ApplicationEnvironment, ApplicationModel, ApplicationMessage, Content> where Content: View
 typealias ApplicationStateContainer<Props, Content> = StateContainer<ApplicationEnvironment, ApplicationModel, ApplicationMessage, Props, Content> where Content: View
