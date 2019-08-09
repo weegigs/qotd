@@ -27,6 +27,7 @@ xcuserdata/
 /.DS_Store
 
 /.idea
+/.vscode
 
 /Carthage
 /MrLabelsPlayground.playground
