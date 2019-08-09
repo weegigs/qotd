@@ -35,6 +35,7 @@
 		0A9F7A0122F964D5008714C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A9F79FF22F964D5008714C7 /* LaunchScreen.storyboard */; };
 		0AC78C1B22FD138A00FA7EB7 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1A22FD138A00FA7EB7 /* ImageService.swift */; };
 		0AC78C1D22FD155F00FA7EB7 /* URLSessionImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1C22FD155F00FA7EB7 /* URLSessionImageService.swift */; };
+		0AC78C1F22FD548900FA7EB7 /* MessageLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1E22FD548900FA7EB7 /* MessageLogger.swift */; };
 		0AF51EAE22FD0D46007C5F12 /* SwifTEA in Frameworks */ = {isa = PBXBuildFile; productRef = 0AF51EAD22FD0D46007C5F12 /* SwifTEA */; };
 		0AF51EB022FD0D46007C5F12 /* WeeDux in Frameworks */ = {isa = PBXBuildFile; productRef = 0AF51EAF22FD0D46007C5F12 /* WeeDux */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		0A9F7A0222F964D5008714C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AC78C1A22FD138A00FA7EB7 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		0AC78C1C22FD155F00FA7EB7 /* URLSessionImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionImageService.swift; sourceTree = "<group>"; };
+		0AC78C1E22FD548900FA7EB7 /* MessageLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLogger.swift; sourceTree = "<group>"; };
 		0AF51EAB22FD0C07007C5F12 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +182,7 @@
 				0A5D6B0422FA42EF00FF5B83 /* ApplicationMessage.swift */,
 				0A9E536F22F989230021D296 /* ApplicationModel.swift */,
 				0A5D6B0E22FA44EB00FF5B83 /* ApplicationStore.swift */,
+				0AC78C1E22FD548900FA7EB7 /* MessageLogger.swift */,
 				0A9A8E4922FB8A9F00FE7FFC /* Resource.swift */,
 				0A9A8E4422FAC0E000FE7FFC /* Images */,
 				0A5D6B0122FA429A00FF5B83 /* Quotes */,
@@ -302,6 +305,7 @@
 				0AC78C1B22FD138A00FA7EB7 /* ImageService.swift in Sources */,
 				0A9A8E4A22FB8A9F00FE7FFC /* Resource.swift in Sources */,
 				0A5D6B0722FA437900FF5B83 /* QuoteCommand.swift in Sources */,
+				0AC78C1F22FD548900FA7EB7 /* MessageLogger.swift in Sources */,
 				0A5D6B0D22FA448000FF5B83 /* TheySaidQuoteService.swift in Sources */,
 				0A9A8E4122FAA80D00FE7FFC /* CardView.swift in Sources */,
 				0A5D6B1422FA6F7900FF5B83 /* CategoryList.swift in Sources */,
