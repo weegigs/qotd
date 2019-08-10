@@ -18,6 +18,8 @@ QOTD uses the free API from [theysaidso.com](https://theysaidso.com/api/). The f
 - [X] Remote images with stateless components
 - [X] Displaying errors when a resource loading fails
 - [X] Cancelling work when a `View` disappears
+- [ ] Control interactions
+- [ ] Unit Test Examples
 
 >At the time of writing a bug is `SwiftUI` is preventing the `onDisappear` method
 being called. This prevents the various cancel messages from being fired.
