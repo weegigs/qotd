@@ -92,7 +92,24 @@ extension Resource {
   }
 }
 
-extension Resource {}
+extension Resource {
+  func load(
+    _ onLoadRequired: @autoclosure () -> Void,
+    reloadFailure: Bool = false,
+    onAvailable: (T) -> Void = { _ in }
+  ) {
+    switch self {
+    case .placeholder:
+      onLoadRequired()
+    case .failed where reloadFailure:
+      onLoadRequired()
+    case let .available(value):
+      onAvailable(value)
+    default:
+      break
+    }
+  }
+}
 
 extension Resource {
   func on(
@@ -100,13 +117,12 @@ extension Resource {
     loading: () -> Void = {},
     failed: (String) -> Void = { _ in },
     available: (T) -> Void = { _ in }
-
   ) {
     switch self {
     case .placeholder:
       placeholder()
     // KAO: I don't pass the task here to prevent the temptation of
-    // using in views
+    // using it within the view or view model
     case .loading:
       loading()
     case let .failed(message):

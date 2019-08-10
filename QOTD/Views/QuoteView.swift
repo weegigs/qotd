@@ -57,6 +57,9 @@ struct QuoteViewBody: View {
       }
     )
     .edgesIgnoringSafeArea(.all)
+    .onAppear {
+      self.model.load(reloadFailure: true)
+    }
     .onDisappear {
       self.model.dismissed()
     }
@@ -84,38 +87,26 @@ struct QuoteView: View {
       self.images = images
       self.dispatcher = dispatcher
 
-      refresh()
+      load()
     }
 
-    func refresh(force: Bool = false) {
+    func load(reloadFailure: Bool = false) {
       guard let quote = quotes[category.id] else {
         return dispatcher.send(QuoteCommands.refreshQOD(category.id))
       }
 
-      if force {
-        return dispatcher.send(QuoteCommands.refreshQOD(category.id))
-      }
+      quote.load(
+        dispatcher.send(QuoteCommands.refreshQOD(category.id)),
+        reloadFailure: reloadFailure
+      ) { quote in
+        guard let image = images[quote.background] else {
+          return dispatcher.send(ImageCommands.load(location: quote.background))
+        }
 
-      switch quote {
-      case .failed, .placeholder:
-        return dispatcher.send(QuoteCommands.refreshQOD(category.id))
-      case let .available(quote):
-        refreshBackground(quote: quote, force: force)
-      default:
-        break
-      }
-    }
-
-    private func refreshBackground(quote: Quote, force _: Bool = false) {
-      guard let image = images[quote.background] else {
-        return dispatcher.send(ImageCommands.load(location: quote.background))
-      }
-
-      switch image {
-      case .failed, .placeholder:
-        return dispatcher.send(ImageCommands.load(location: quote.background))
-      default:
-        break
+        image.load(
+          dispatcher.send(ImageCommands.load(location: quote.background)),
+          reloadFailure: reloadFailure
+        )
       }
     }
 
