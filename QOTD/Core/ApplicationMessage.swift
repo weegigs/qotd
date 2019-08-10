@@ -31,4 +31,3 @@ typealias ApplicationReducer = Reducer<ApplicationModel, ApplicationMessage>
 func createApplicationMessageHandler() -> ApplicationMessageHandler {
   return quoteMessageHandler <> imageMessageHandler
 }
-
