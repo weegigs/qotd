@@ -27,7 +27,7 @@ protocol QuoteServiceContainer {
 }
 
 public enum QuoteServiceError: Error, CustomStringConvertible {
-  case unknownError
+  case unexpectedFailure(Error)
   case invalidEndpoint
   case invalidResponse
   case invalidStatusCode(Int)
@@ -36,6 +36,8 @@ public enum QuoteServiceError: Error, CustomStringConvertible {
 
   public var description: String {
     switch self {
+    case let .unexpectedFailure(error):
+      return error.localizedDescription
     case let .invalidStatusCode(code):
       return "invalid status code: \(code)"
     case let .decodeError(error):

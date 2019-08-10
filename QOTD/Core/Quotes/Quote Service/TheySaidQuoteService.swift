@@ -113,8 +113,8 @@ final class TheySaidQuoteService: QuoteService {
     request.addValue("application/json", forHTTPHeaderField: "Accept")
 
     let task = session.dataTask(with: request) { (data, response, error) -> Void in
-      if error != nil {
-        return forfil(.failure(.unknownError))
+      if let failure = error {
+        return forfil(.failure(.unexpectedFailure(failure)))
       }
 
       guard
