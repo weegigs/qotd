@@ -74,7 +74,7 @@ private let categoriesLoaded = ApplicationReducer(path: \.categories) { state, m
     case let .categoriesLoaded(categories) = message
   else { return }
 
-  state = .available(categories.sorted { $0.id > $1.id })
+  state = .available(categories.sorted { $0.title < $1.title })
 }
 
 private let quoteLoading = ApplicationReducer(path: \.quotes) { state, message in

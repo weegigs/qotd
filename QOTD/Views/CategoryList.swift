@@ -35,7 +35,6 @@ struct CategoryListBody: View {
         }
       }
     }
-    .padding()
     .navigationBarTitle("Quote of the day")
   }
 }
@@ -50,7 +49,7 @@ struct CategoryList: View {
     }
 
     init(categories: ApplicationModel.Categories, dispatcher: ApplicationStore.Dispatcher) {
-      self.categories = categories
+      self.categories = categories.map { $0.sorted(by: { $0.title < $1.title }) }
       self.dispatcher = dispatcher
     }
   }
