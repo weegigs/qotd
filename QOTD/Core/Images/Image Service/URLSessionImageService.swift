@@ -64,8 +64,6 @@ final class URLSessionImageService: ImageService {
 
     task.resume()
 
-    return AnyCancellable {
-      task.cancel()
-    }
+    return task
   }
 }

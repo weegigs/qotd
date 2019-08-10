@@ -36,6 +36,7 @@
 		0AC78C1B22FD138A00FA7EB7 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1A22FD138A00FA7EB7 /* ImageService.swift */; };
 		0AC78C1D22FD155F00FA7EB7 /* URLSessionImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1C22FD155F00FA7EB7 /* URLSessionImageService.swift */; };
 		0AC78C1F22FD548900FA7EB7 /* MessageLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1E22FD548900FA7EB7 /* MessageLogger.swift */; };
+		0ACBCB2122FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBCB2022FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift */; };
 		0AF51EAE22FD0D46007C5F12 /* SwifTEA in Frameworks */ = {isa = PBXBuildFile; productRef = 0AF51EAD22FD0D46007C5F12 /* SwifTEA */; };
 		0AF51EB022FD0D46007C5F12 /* WeeDux in Frameworks */ = {isa = PBXBuildFile; productRef = 0AF51EAF22FD0D46007C5F12 /* WeeDux */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,7 @@
 		0AC78C1A22FD138A00FA7EB7 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		0AC78C1C22FD155F00FA7EB7 /* URLSessionImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionImageService.swift; sourceTree = "<group>"; };
 		0AC78C1E22FD548900FA7EB7 /* MessageLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLogger.swift; sourceTree = "<group>"; };
+		0ACBCB2022FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionDataTask+Cancellable.swift"; sourceTree = "<group>"; };
 		0AF51EAB22FD0C07007C5F12 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +160,7 @@
 				0A9F79F622F964D0008714C7 /* SceneDelegate.swift */,
 				0A9F7A1922F96543008714C7 /* Core */,
 				0A5D6B1022FA6BD400FF5B83 /* Views */,
+				0ACBCB1F22FE9DD800BEBB0C /* Extensions */,
 				0A9F7A0222F964D5008714C7 /* Info.plist */,
 				0A9F79FF22F964D5008714C7 /* LaunchScreen.storyboard */,
 				0A9F79FA22F964D5008714C7 /* Assets.xcassets */,
@@ -197,6 +200,14 @@
 				0AC78C1C22FD155F00FA7EB7 /* URLSessionImageService.swift */,
 			);
 			path = "Image Service";
+			sourceTree = "<group>";
+		};
+		0ACBCB1F22FE9DD800BEBB0C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0ACBCB2022FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		0AF51EA822FCFC5A007C5F12 /* Frameworks */ = {
@@ -296,6 +307,7 @@
 				0A9A8E4622FAC10100FE7FFC /* ImageMessage.swift in Sources */,
 				0A5D6B1222FA6C1500FF5B83 /* Home.swift in Sources */,
 				0A1F34A422FA8F1900264A6D /* ResourcePanel.swift in Sources */,
+				0ACBCB2122FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift in Sources */,
 				0A5D6B0922FA438F00FF5B83 /* ApplicationCommand.swift in Sources */,
 				0A5D6B0322FA42C400FF5B83 /* QuoteMessage.swift in Sources */,
 				0A1F34A222FA88A200264A6D /* QuoteView.swift in Sources */,
