@@ -30,6 +30,6 @@ struct CardView<Body>: View where Body: View {
       self.content()
     }
     .cornerRadius(20)
-    .shadow(color: Color.gray.opacity(0.7), radius: 12, x: 0, y: 0)
+    .shadow(color: Color(.systemFill), radius: 12, x: 0, y: 0)
   }
 }

@@ -40,9 +40,8 @@ struct QuoteViewBody: View {
           }
           .padding()
           .background(
-            Color(white: 0.95)
-              .opacity(0.6)
-              .blur(radius: 5)
+            Color.init(UIColor.systemBackground)
+              .opacity(0.7)
           )
         }
         .padding(.bottom, 80)
