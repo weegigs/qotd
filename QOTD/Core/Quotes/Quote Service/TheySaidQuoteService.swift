@@ -143,13 +143,12 @@ final class TheySaidQuoteService: QuoteService {
         let value = try self.decoder.decode(type, from: data)
         return forfil(.success(value))
       } catch {
-
         return forfil(.failure(.decodeError(error)))
       }
     }
 
     task.resume()
-    
+
     return task
   }
 }
