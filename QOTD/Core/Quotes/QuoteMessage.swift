@@ -47,16 +47,12 @@ private let categoriesLoading = ApplicationReducer(path: \.categories) { state, 
 private let categoriesLoadingCancelled = ApplicationReducer(path: \.categories) { state, message in
   guard
     let message = message as? QuoteMessage,
-    case .categoriesLoadingCancelled = message
+    case .categoriesLoadingCancelled = message,
+    case let .loading(task) = state
   else { return }
 
-  switch state {
-  case let .loading(task):
-    task.cancel()
-    state = .placeholder
-  default:
-    break
-  }
+  task.cancel()
+  state = .placeholder
 }
 
 private let categoriesLoadingFailed = ApplicationReducer(path: \.categories) { state, message in
@@ -90,16 +86,12 @@ private let quoteLoadingCancelled = ApplicationReducer(path: \.quotes) { state, 
   guard
     let message = message as? QuoteMessage,
     case let .quoteLoadingCancelled(category) = message,
-    let resource = state[category]
+    let resource = state[category],
+    case let .loading(task) = resource
   else { return }
 
-  switch resource {
-  case let .loading(task):
-    task.cancel()
-    state[category] = .placeholder
-  default:
-    break
-  }
+  task.cancel()
+  state[category] = .placeholder
 }
 
 private let quoteLoadingFailed = ApplicationReducer(path: \.quotes) { state, message in
