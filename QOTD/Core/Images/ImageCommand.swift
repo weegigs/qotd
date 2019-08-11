@@ -26,7 +26,7 @@ import UIKit
 enum ImageCommands {
   static func load(location: String) -> ApplicationCommand {
     return ApplicationCommand { environment, publish in
-      let task = environment.imageService.load(url: location) { result in
+      let task = environment.images.load(url: location) { result in
         switch result {
         case let .success(image):
           publish(ImageMessage.loaded(location: location, image: image))

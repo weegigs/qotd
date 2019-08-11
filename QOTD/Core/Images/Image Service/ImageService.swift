@@ -25,7 +25,7 @@ import Foundation
 import UIKit
 
 protocol ImageServiceContainer {
-  var imageService: ImageService { get }
+  var images: ImageService { get }
 }
 
 enum ImageServiceError: Error, CustomStringConvertible {

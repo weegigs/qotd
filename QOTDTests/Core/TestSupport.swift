@@ -28,20 +28,33 @@ import UIKit
 
 struct TestEnvironment: ApplicationEnvironment {
   let quotes: QuoteService
-  let imageService: ImageService
+  let images: ImageService
 
   init(
     categories: @escaping TestQuoteService.LoadCategories = TestQuoteService.Defaults.categories,
-    qotd: @escaping TestQuoteService.LoadQOTD = TestQuoteService.Defaults.qotd
+    qotd: @escaping TestQuoteService.LoadQOTD = TestQuoteService.Defaults.qotd,
+    loadImage: @escaping TestImageService.Load = TestImageService.DefaultLoad
   ) {
     quotes = TestQuoteService(categories: categories, qotd: qotd)
-    imageService = TestImageService()
+    images = TestImageService(load: loadImage)
   }
 }
 
 final class TestImageService: ImageService {
-  func load(url _: URL, forfil _: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
-    fatalError()
+  typealias Load = (URL, @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable
+
+  static let DefaultLoad: Load = {
+    $1(.failure(.internalError(message: "default-failure"))); return TestCancelable()
+  }
+
+  private let load: Load
+
+  func load(url: URL, forfil: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
+    load(url, forfil)
+  }
+
+  init(load: @escaping Load = DefaultLoad) {
+    self.load = load
   }
 }
 
@@ -83,10 +96,15 @@ struct TestQuoteService: QuoteService {
 }
 
 func createTestStore(
-  categories _: @escaping TestQuoteService.LoadCategories = TestQuoteService.Defaults.categories,
-  qotd _: @escaping TestQuoteService.LoadQOTD = TestQuoteService.Defaults.qotd
+  categories: @escaping TestQuoteService.LoadCategories = TestQuoteService.Defaults.categories,
+  qotd: @escaping TestQuoteService.LoadQOTD = TestQuoteService.Defaults.qotd,
+  loadImage: @escaping TestImageService.Load = TestImageService.DefaultLoad
 ) -> some ApplicationStore {
   return ApplicationStore(environment: .test {
-    TestEnvironment()
+    TestEnvironment(
+      categories: categories,
+      qotd: qotd,
+      loadImage: loadImage
+    )
   })
 }

@@ -44,7 +44,7 @@ class QuoteMessageTests: XCTestCase {
       state: &model,
       message: QuoteMessage.categoriesLoading(task: task)
     )
-    
+
     switch model.categories {
     case .loading:
       XCTAssertFalse(task.cancelled)
@@ -52,7 +52,7 @@ class QuoteMessageTests: XCTestCase {
       XCTFail("categories in unexpected state \(model.categories)")
     }
   }
-  
+
   func testHandleCategoriesLoadingFailure() {
     _ = quoteMessageHandler.run(
       state: &model,
@@ -78,7 +78,7 @@ class QuoteMessageTests: XCTestCase {
 
     switch model.categories {
     case .placeholder:
-      XCTAssert(task.cancelled)
+      XCTAssertTrue(task.cancelled)
     default:
       XCTFail("categories in unexpected state \(model.categories)")
     }
@@ -115,7 +115,7 @@ class QuoteMessageTests: XCTestCase {
       XCTFail("categories in unexpected state \(model.categories)")
     }
   }
-  
+
   func testHandleCategoriesLoaded() {
     let categories = [
       QuoteCategory(id: "b", title: "B"),
@@ -125,15 +125,15 @@ class QuoteMessageTests: XCTestCase {
       state: &model,
       message: QuoteMessage.categoriesLoaded(categories: categories)
     )
-    
+
     switch model.categories {
     case let .available(update):
-      XCTAssertEqual(update.map { $0.id }.sorted(), categories.map { $0.id}.sorted())
+      XCTAssertEqual(update.map { $0.id }.sorted(), categories.map { $0.id }.sorted())
     default:
       XCTFail("categories in unexpected state \(model.categories)")
     }
   }
-  
+
   func testCategoriesLoadedSortsByTitle() {
     let categories = [
       QuoteCategory(id: "b", title: "B"),
@@ -143,7 +143,7 @@ class QuoteMessageTests: XCTestCase {
       state: &model,
       message: QuoteMessage.categoriesLoaded(categories: categories)
     )
-    
+
     switch model.categories {
     case let .available(update):
       XCTAssertEqual("A", update.first!.title)

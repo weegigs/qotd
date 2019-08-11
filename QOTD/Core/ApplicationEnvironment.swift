@@ -37,6 +37,6 @@ enum ApplicationEnvironments {
 }
 
 private struct LiveEnvironment: ApplicationEnvironment {
-  let imageService: ImageService = URLSessionImageService()
+  let images: ImageService = URLSessionImageService()
   let quotes: QuoteService = TheySaidQuoteService()
 }
