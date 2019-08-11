@@ -19,13 +19,39 @@ QOTD uses the free API from [theysaidso.com](https://theysaidso.com/api/). The f
 - [X] Displaying errors when a resource loading fails
 - [X] Cancelling work when a `View` disappears
 - [ ] Control interactions
-- [ ] Unit Test Examples
+- [X] Unit Test example for MessageHandlers
+- [ ] Unit Test example for Commands
+- [ ] Unit Test example for Views
 
 >At the time of writing a bug is `SwiftUI` is preventing the `onDisappear` method
 being called. This prevents the various cancel messages from being fired.
 
-If there are any other examples you'd like to see, just let me know.
+If there are any other examples you'd like to see, please let me know.
 
 ## Slides
 
 The slides from my talk at CocoaHeads Melbourne can be found at [SwifTEA UI - Unidirectional dataflow with SwiftUI and WeeDux](https://www.slideshare.net/KevinONeill1/swiftea-ui-unidirectional-data-flow-with-swiftui-and-weedux)
+
+## Licence
+
+MIT License
+
+Copyright (c) 2019 Kevin O'Neill
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
