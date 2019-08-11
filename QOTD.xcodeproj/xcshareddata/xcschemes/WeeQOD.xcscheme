@@ -26,13 +26,24 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0A9F79F022F964D0008714C7"
+            BuildableName = "QOTD.app"
+            BlueprintName = "QOTD"
+            ReferencedContainer = "container:QOTD.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0A9F7A0622F964D6008714C7"
+               BlueprintIdentifier = "0A8FAC2C22FF8F8E001B07D0"
                BuildableName = "QOTDTests.xctest"
                BlueprintName = "QOTDTests"
                ReferencedContainer = "container:QOTD.xcodeproj">

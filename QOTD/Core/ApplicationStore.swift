@@ -28,8 +28,8 @@ typealias ApplicationProgram = Program<ApplicationEnvironment, ApplicationModel,
 typealias ApplicationMiddleware = Middleware<ApplicationEnvironment, ApplicationModel, ApplicationMessage>
 
 extension Store where Environment == ApplicationEnvironment, Model == ApplicationModel, Message == ApplicationMessage {
-  convenience init() {
-    self.init(program: ApplicationProgram(environment: .live))
+  convenience init(environment: ApplicationEnvironments = .live) {
+    self.init(program: ApplicationProgram(environment: environment))
   }
 }
 

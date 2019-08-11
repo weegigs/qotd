@@ -21,6 +21,8 @@
 		0A5D6B1222FA6C1500FF5B83 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D6B1122FA6C1500FF5B83 /* Home.swift */; };
 		0A5D6B1422FA6F7900FF5B83 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D6B1322FA6F7900FF5B83 /* CategoryList.swift */; };
 		0A5D6B1622FA705500FF5B83 /* SwifTEA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D6B1522FA705500FF5B83 /* SwifTEA.swift */; };
+		0A8FAC3A22FF9129001B07D0 /* QuoteMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8FAC3922FF9129001B07D0 /* QuoteMessageTests.swift */; };
+		0A8FAC3C22FF91BB001B07D0 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8FAC3B22FF91BB001B07D0 /* TestSupport.swift */; };
 		0A9A8E3F22FAA23800FE7FFC /* QuoteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9A8E3E22FAA23800FE7FFC /* QuoteCategory.swift */; };
 		0A9A8E4122FAA80D00FE7FFC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9A8E4022FAA80D00FE7FFC /* CardView.swift */; };
 		0A9A8E4622FAC10100FE7FFC /* ImageMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9A8E4522FAC10100FE7FFC /* ImageMessage.swift */; };
@@ -41,6 +43,16 @@
 		0AF51EB022FD0D46007C5F12 /* WeeDux in Frameworks */ = {isa = PBXBuildFile; productRef = 0AF51EAF22FD0D46007C5F12 /* WeeDux */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0A8FAC3222FF8F8F001B07D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A9F79E922F964D0008714C7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0A9F79F022F964D0008714C7;
+			remoteInfo = QOTD;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0A1F34A122FA88A200264A6D /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		0A1F34A322FA8F1900264A6D /* ResourcePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcePanel.swift; sourceTree = "<group>"; };
@@ -56,6 +68,10 @@
 		0A5D6B1122FA6C1500FF5B83 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		0A5D6B1322FA6F7900FF5B83 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		0A5D6B1522FA705500FF5B83 /* SwifTEA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifTEA.swift; sourceTree = "<group>"; };
+		0A8FAC2D22FF8F8E001B07D0 /* QOTDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QOTDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A8FAC3122FF8F8F001B07D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A8FAC3922FF9129001B07D0 /* QuoteMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteMessageTests.swift; sourceTree = "<group>"; };
+		0A8FAC3B22FF91BB001B07D0 /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
 		0A9A8E3E22FAA23800FE7FFC /* QuoteCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteCategory.swift; sourceTree = "<group>"; };
 		0A9A8E4022FAA80D00FE7FFC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		0A9A8E4522FAC10100FE7FFC /* ImageMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMessage.swift; sourceTree = "<group>"; };
@@ -78,6 +94,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0A8FAC2A22FF8F8E001B07D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A9F79EE22F964D0008714C7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -125,6 +148,32 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0A8FAC2E22FF8F8F001B07D0 /* QOTDTests */ = {
+			isa = PBXGroup;
+			children = (
+				0A8FAC3722FF90E3001B07D0 /* Core */,
+				0A8FAC3122FF8F8F001B07D0 /* Info.plist */,
+			);
+			path = QOTDTests;
+			sourceTree = "<group>";
+		};
+		0A8FAC3722FF90E3001B07D0 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0A8FAC3B22FF91BB001B07D0 /* TestSupport.swift */,
+				0A8FAC3822FF90EA001B07D0 /* Quotes */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		0A8FAC3822FF90EA001B07D0 /* Quotes */ = {
+			isa = PBXGroup;
+			children = (
+				0A8FAC3922FF9129001B07D0 /* QuoteMessageTests.swift */,
+			);
+			path = Quotes;
+			sourceTree = "<group>";
+		};
 		0A9A8E4422FAC0E000FE7FFC /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				0A9F79F322F964D0008714C7 /* QOTD */,
+				0A8FAC2E22FF8F8F001B07D0 /* QOTDTests */,
 				0A9F79F222F964D0008714C7 /* Products */,
 				0AF51EA822FCFC5A007C5F12 /* Frameworks */,
 				0AF51EAB22FD0C07007C5F12 /* LICENSE */,
@@ -149,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				0A9F79F122F964D0008714C7 /* QOTD.app */,
+				0A8FAC2D22FF8F8E001B07D0 /* QOTDTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +271,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0A8FAC2C22FF8F8E001B07D0 /* QOTDTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A8FAC3622FF8F8F001B07D0 /* Build configuration list for PBXNativeTarget "QOTDTests" */;
+			buildPhases = (
+				0A8FAC2922FF8F8E001B07D0 /* Sources */,
+				0A8FAC2A22FF8F8E001B07D0 /* Frameworks */,
+				0A8FAC2B22FF8F8E001B07D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A8FAC3322FF8F8F001B07D0 /* PBXTargetDependency */,
+			);
+			name = QOTDTests;
+			productName = QOTDTests;
+			productReference = 0A8FAC2D22FF8F8E001B07D0 /* QOTDTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		0A9F79F022F964D0008714C7 /* QOTD */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A9F7A1022F964D6008714C7 /* Build configuration list for PBXNativeTarget "QOTD" */;
@@ -251,6 +320,10 @@
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Kevin O'Neill";
 				TargetAttributes = {
+					0A8FAC2C22FF8F8E001B07D0 = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = 0A9F79F022F964D0008714C7;
+					};
 					0A9F79F022F964D0008714C7 = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -273,11 +346,19 @@
 			projectRoot = "";
 			targets = (
 				0A9F79F022F964D0008714C7 /* QOTD */,
+				0A8FAC2C22FF8F8E001B07D0 /* QOTDTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0A8FAC2B22FF8F8E001B07D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A9F79EF22F964D0008714C7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,6 +372,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0A8FAC2922FF8F8E001B07D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A8FAC3A22FF9129001B07D0 /* QuoteMessageTests.swift in Sources */,
+				0A8FAC3C22FF91BB001B07D0 /* TestSupport.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0A9F79ED22F964D0008714C7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,6 +417,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0A8FAC3322FF8F8F001B07D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0A9F79F022F964D0008714C7 /* QOTD */;
+			targetProxy = 0A8FAC3222FF8F8F001B07D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		0A9F79FF22F964D5008714C7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -339,6 +437,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0A8FAC3422FF8F8F001B07D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z7BZBSJBEL;
+				INFOPLIST_FILE = QOTDTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = au.id.oneill.QOTDTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QOTD.app/QOTD";
+			};
+			name = Debug;
+		};
+		0A8FAC3522FF8F8F001B07D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z7BZBSJBEL;
+				INFOPLIST_FILE = QOTDTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = au.id.oneill.QOTDTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QOTD.app/QOTD";
+			};
+			name = Release;
+		};
 		0A9F7A0E22F964D6008714C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -496,6 +634,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A8FAC3622FF8F8F001B07D0 /* Build configuration list for PBXNativeTarget "QOTDTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A8FAC3422FF8F8F001B07D0 /* Debug */,
+				0A8FAC3522FF8F8F001B07D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0A9F79EC22F964D0008714C7 /* Build configuration list for PBXProject "QOTD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

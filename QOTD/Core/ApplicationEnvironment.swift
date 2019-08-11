@@ -24,11 +24,14 @@ typealias ApplicationEnvironment = QuoteServiceContainer & ImageServiceContainer
 
 enum ApplicationEnvironments {
   case live
+  case test(create: () -> ApplicationEnvironment)
 
   func create() -> ApplicationEnvironment {
     switch self {
     case .live:
       return LiveEnvironment()
+    case let .test(create):
+      return create()
     }
   }
 }
