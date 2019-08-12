@@ -152,4 +152,82 @@ class QuoteMessageTests: XCTestCase {
       XCTFail("categories in unexpected state \(model.categories)")
     }
   }
+  
+  func testHandleQuoteLoading() {
+    let task = TestCancelable()
+    
+    _ = quoteMessageHandler.run(
+      state: &model,
+      message: QuoteMessage.quoteLoading(category: "test", task: task)
+    )
+    
+    switch model.quotes["test"] {
+    case .loading:
+      XCTAssertFalse(task.cancelled)
+    default:
+      XCTFail("quote in unexpected state \(model.categories)")
+    }
+  }
+  
+  func testQuoteLoadingFailure() {
+    _ = quoteMessageHandler.run(
+      state: &model,
+      message: QuoteMessage.quoteLoadingFailed(category: "test", error: .apiError("test"))
+    )
+    
+    switch model.quotes["test"] {
+    case let .failed(message):
+      XCTAssertEqual(message, "test")
+    default:
+      XCTFail("quote in unexpected state \(model.categories)")
+    }
+  }
+  
+  func testQuoteLoadingCanBeCancelled() {
+    let task = TestCancelable()
+    model.quotes["test"] = .loading(task: task)
+    
+    _ = quoteMessageHandler.run(
+      state: &model,
+      message: QuoteMessage.quoteLoadingCancelled(category: "test")
+    )
+    
+    switch model.quotes["test"] {
+    case .placeholder:
+      XCTAssertTrue(task.cancelled)
+    default:
+      XCTFail("quote in unexpected state \(model.categories)")
+    }
+  }
+  
+  func testQuoteLoadingDoesntCancelAvailable() {
+    model.quotes["test"] = .available(Quote(id: "test", quote: "tests are good", author: "test-mc-test", background: ""))
+    
+    _ = quoteMessageHandler.run(
+      state: &model,
+      message: QuoteMessage.quoteLoadingCancelled(category: "test")
+    )
+    
+    switch model.quotes["test"] {
+    case let .available(quote):
+      XCTAssertEqual(quote.quote, "tests are good")
+    default:
+      XCTFail("quote in unexpected state \(model.categories)")
+    }
+  }
+
+  func testQuotesLoad() {
+    _ = quoteMessageHandler.run(
+      state: &model,
+      message: QuoteMessage.quoteLoaded(category: "test", quote: Quote(id: "test", quote: "tests are good", author: "test-mc-test", background: ""))
+    )
+    
+    switch model.quotes["test"] {
+    case let .available(quote):
+      XCTAssertEqual(quote.quote, "tests are good")
+    default:
+      XCTFail("quote in unexpected state \(model.categories)")
+    }
+  }
+
 }
