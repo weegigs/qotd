@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "WeeDux",
-        "repositoryURL": "https://github.com/weegigs/weedux.git",
+        "package": "SwifTEA",
+        "repositoryURL": "https://github.com/weegigs/swiftea.git",
         "state": {
           "branch": null,
-          "revision": "9df335748a567167366c9bc1b5662efbf386596a",
-          "version": "0.12.1"
+          "revision": "b46343d4105291b8faac6af5b78b03870e5cfb6b",
+          "version": "0.13.0"
         }
       }
     ]

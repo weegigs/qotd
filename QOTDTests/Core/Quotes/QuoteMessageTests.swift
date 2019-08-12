@@ -24,7 +24,7 @@ import XCTest
 
 import Combine
 @testable import QOTD
-import WeeDux
+import SwifTEA
 
 class QuoteMessageTests: XCTestCase {
   var model: ApplicationModel!

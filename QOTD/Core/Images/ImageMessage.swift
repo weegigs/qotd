@@ -21,8 +21,8 @@
 // SOFTWARE.
 
 import Combine
+import SwifTEA
 import UIKit
-import WeeDux
 
 enum ImageMessage: ApplicationMessage {
   case loading(location: String, task: Cancellable)

@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import Foundation
-import WeeDux
+import SwifTEA
 
 let Logger: ApplicationMiddleware = { _, _, next in
   { message in

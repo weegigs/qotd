@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import SwifTEA
+import SwifTEAUI
 import SwiftUI
 
 typealias ApplicationStoreContainer<Content> = StoreContainer<ApplicationEnvironment, ApplicationModel, ApplicationMessage, Content> where Content: View

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A1F34A222FA88A200264A6D /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F34A122FA88A200264A6D /* QuoteView.swift */; };
 		0A1F34A422FA8F1900264A6D /* ResourcePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F34A322FA8F1900264A6D /* ResourcePanel.swift */; };
+		0A5B14412300E56100E32F6B /* SwifTEAUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5B14402300E56100E32F6B /* SwifTEAUI */; };
+		0A5B14432300E56100E32F6B /* SwifTEA in Frameworks */ = {isa = PBXBuildFile; productRef = 0A5B14422300E56100E32F6B /* SwifTEA */; };
 		0A5D6AFD22FA404D00FF5B83 /* QuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D6AFC22FA404D00FF5B83 /* QuoteService.swift */; };
 		0A5D6B0022FA41F100FF5B83 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D6AFF22FA41F100FF5B83 /* Quote.swift */; };
 		0A5D6B0322FA42C400FF5B83 /* QuoteMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5D6B0222FA42C400FF5B83 /* QuoteMessage.swift */; };
@@ -39,8 +41,6 @@
 		0AC78C1D22FD155F00FA7EB7 /* URLSessionImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1C22FD155F00FA7EB7 /* URLSessionImageService.swift */; };
 		0AC78C1F22FD548900FA7EB7 /* MessageLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1E22FD548900FA7EB7 /* MessageLogger.swift */; };
 		0ACBCB2122FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBCB2022FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift */; };
-		0AF51EAE22FD0D46007C5F12 /* SwifTEA in Frameworks */ = {isa = PBXBuildFile; productRef = 0AF51EAD22FD0D46007C5F12 /* SwifTEA */; };
-		0AF51EB022FD0D46007C5F12 /* WeeDux in Frameworks */ = {isa = PBXBuildFile; productRef = 0AF51EAF22FD0D46007C5F12 /* WeeDux */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,8 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AF51EB022FD0D46007C5F12 /* WeeDux in Frameworks */,
-				0AF51EAE22FD0D46007C5F12 /* SwifTEA in Frameworks */,
+				0A5B14432300E56100E32F6B /* SwifTEA in Frameworks */,
+				0A5B14412300E56100E32F6B /* SwifTEAUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,8 +303,8 @@
 			);
 			name = QOTD;
 			packageProductDependencies = (
-				0AF51EAD22FD0D46007C5F12 /* SwifTEA */,
-				0AF51EAF22FD0D46007C5F12 /* WeeDux */,
+				0A5B14402300E56100E32F6B /* SwifTEAUI */,
+				0A5B14422300E56100E32F6B /* SwifTEA */,
 			);
 			productName = WeeQOD;
 			productReference = 0A9F79F122F964D0008714C7 /* QOTD.app */;
@@ -339,7 +339,7 @@
 			);
 			mainGroup = 0A9F79E822F964D0008714C7;
 			packageReferences = (
-				0AF51EAC22FD0D46007C5F12 /* XCRemoteSwiftPackageReference "weedux" */,
+				0A5B143F2300E56100E32F6B /* XCRemoteSwiftPackageReference "swiftea" */,
 			);
 			productRefGroup = 0A9F79F222F964D0008714C7 /* Products */;
 			projectDirPath = "";
@@ -664,26 +664,26 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0AF51EAC22FD0D46007C5F12 /* XCRemoteSwiftPackageReference "weedux" */ = {
+		0A5B143F2300E56100E32F6B /* XCRemoteSwiftPackageReference "swiftea" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/weegigs/weedux.git";
+			repositoryURL = "https://github.com/weegigs/swiftea.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.1;
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.13.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0AF51EAD22FD0D46007C5F12 /* SwifTEA */ = {
+		0A5B14402300E56100E32F6B /* SwifTEAUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0AF51EAC22FD0D46007C5F12 /* XCRemoteSwiftPackageReference "weedux" */;
-			productName = SwifTEA;
+			package = 0A5B143F2300E56100E32F6B /* XCRemoteSwiftPackageReference "swiftea" */;
+			productName = SwifTEAUI;
 		};
-		0AF51EAF22FD0D46007C5F12 /* WeeDux */ = {
+		0A5B14422300E56100E32F6B /* SwifTEA */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0AF51EAC22FD0D46007C5F12 /* XCRemoteSwiftPackageReference "weedux" */;
-			productName = WeeDux;
+			package = 0A5B143F2300E56100E32F6B /* XCRemoteSwiftPackageReference "swiftea" */;
+			productName = SwifTEA;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

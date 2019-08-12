@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import Foundation
-import WeeDux
+import SwifTEA
 
 protocol ApplicationMessage {}
 

@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import Combine
-import WeeDux
+import SwifTEA
 
 enum QuoteMessage: ApplicationMessage {
   case categoriesLoading(task: Cancellable)

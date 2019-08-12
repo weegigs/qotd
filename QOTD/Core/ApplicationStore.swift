@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import SwifTEA
-import WeeDux
+import SwifTEAUI
 
 typealias ApplicationStore = Store<ApplicationEnvironment, ApplicationModel, ApplicationMessage>
 typealias ApplicationProgram = Program<ApplicationEnvironment, ApplicationModel, ApplicationMessage>
