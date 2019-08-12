@@ -2,7 +2,7 @@
 
 ![Screenshot](ipad-screenshot.png)
 
-An example app using SwiftUI, WeeDux and SwifTEA.
+An example app using SwiftUI, SwifTEA and SwifTEAUI.
 
 ## Overview
 
