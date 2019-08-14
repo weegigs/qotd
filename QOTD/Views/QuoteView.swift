@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import SwiftUI
+import SwifTEAUI
 
 struct QuoteViewBody: View {
   let model: QuoteView.ViewModel

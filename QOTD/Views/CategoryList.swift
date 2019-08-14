@@ -45,7 +45,7 @@ struct CategoryList: View {
 
     let categories: ApplicationModel.Categories
     func refresh(force _: Bool = false) {
-      dispatcher.send(QuoteCommands.refreshCategories)
+      dispatcher.send(CategoriesCommands.refreshCategories)
     }
 
     init(categories: ApplicationModel.Categories, dispatcher: ApplicationStore.Dispatcher) {

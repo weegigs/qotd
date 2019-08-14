@@ -20,17 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Foundation
+import Combine
 import SwifTEA
 
-protocol ApplicationMessage {}
+typealias QuoteCommand = Command<QuoteEnvironment, QuoteMessage>
 
-typealias ApplicationMessageHandler = MessageHandler<ApplicationEnvironment, ApplicationModel, ApplicationMessage>
+enum QuoteCommands {
+  static let refreshQOD = { (category: String) -> QuoteCommand in
+    QuoteCommand { environment, publish in
+      let task = environment.quotes.qod(category: category) { result in
+        switch result {
+        case let .failure(error):
+          publish(QuoteMessage.quoteLoadingFailed(category: category, error: error))
+        case let .success(quote):
+          publish(QuoteMessage.quoteLoaded(category: category, quote: quote))
+        }
+      }
 
-extension CategoriesMessage: ApplicationMessage {}
-extension QuoteMessage: ApplicationMessage {}
-extension ImageMessage: ApplicationMessage {}
-
-func createApplicationMessageHandler() -> ApplicationMessageHandler {
-  categoriesMessageHandler.lift(\.categories) <> quoteMessageHandler.lift(\.quotes) <> imageMessageHandler.lift(\.cache.images)
+      publish(QuoteMessage.quoteLoading(category: category, task: task))
+    }
+  }
 }

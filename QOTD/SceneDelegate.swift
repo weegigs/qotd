@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       window.makeKeyAndVisible()
 
       if case .placeholder = store.model.categories {
-        store.dispatcher.send(QuoteCommands.refreshCategories)
+        store.dispatcher.send(CategoriesCommands.refreshCategories)
       }
     }
   }

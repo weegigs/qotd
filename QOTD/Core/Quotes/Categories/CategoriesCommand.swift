@@ -21,33 +21,21 @@
 // SOFTWARE.
 
 import Combine
+import SwifTEA
 
-enum QuoteCommands {
-  static let refreshCategories = ApplicationCommand { environment, publish in
+typealias CategoriesCommand = Command<QuoteEnvironment, CategoriesMessage>
+
+enum CategoriesCommands {
+  static let refreshCategories = CategoriesCommand { environment, publish in
 
     let task = environment.quotes.categories { result in
       switch result {
       case let .failure(error):
-        publish(QuoteMessage.categoriesLoadingFailed(error: error))
+        publish(CategoriesMessage.categoriesLoadingFailed(error: error))
       case let .success(categories):
-        publish(QuoteMessage.categoriesLoaded(categories: categories))
+        publish(CategoriesMessage.categoriesLoaded(categories: categories))
       }
     }
-    publish(QuoteMessage.categoriesLoading(task: task))
-  }
-
-  static let refreshQOD = { (category: String) -> ApplicationCommand in
-    ApplicationCommand { environment, publish in
-      let task = environment.quotes.qod(category: category) { result in
-        switch result {
-        case let .failure(error):
-          publish(QuoteMessage.quoteLoadingFailed(category: category, error: error))
-        case let .success(quote):
-          publish(QuoteMessage.quoteLoaded(category: category, quote: quote))
-        }
-      }
-
-      publish(QuoteMessage.quoteLoading(category: category, task: task))
-    }
+    publish(CategoriesMessage.categoriesLoading(task: task))
   }
 }

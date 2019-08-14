@@ -41,6 +41,11 @@
 		0AC78C1D22FD155F00FA7EB7 /* URLSessionImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1C22FD155F00FA7EB7 /* URLSessionImageService.swift */; };
 		0AC78C1F22FD548900FA7EB7 /* MessageLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC78C1E22FD548900FA7EB7 /* MessageLogger.swift */; };
 		0ACBCB2122FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACBCB2022FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift */; };
+		0AE5797E2302D57700CD2AEE /* CategoriesMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5797D2302D57700CD2AEE /* CategoriesMessage.swift */; };
+		0AE5798023037A6600CD2AEE /* CategoriesCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5797F23037A6600CD2AEE /* CategoriesCommand.swift */; };
+		0AE5798423037C7400CD2AEE /* QuoteEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5798323037C7400CD2AEE /* QuoteEnvironment.swift */; };
+		0AE5798623037C9C00CD2AEE /* ImageEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5798523037C9C00CD2AEE /* ImageEnvironment.swift */; };
+		0AE5798A2303833700CD2AEE /* CategoriesMessageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE579892303833700CD2AEE /* CategoriesMessageTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +95,11 @@
 		0AC78C1C22FD155F00FA7EB7 /* URLSessionImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionImageService.swift; sourceTree = "<group>"; };
 		0AC78C1E22FD548900FA7EB7 /* MessageLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLogger.swift; sourceTree = "<group>"; };
 		0ACBCB2022FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionDataTask+Cancellable.swift"; sourceTree = "<group>"; };
+		0AE5797D2302D57700CD2AEE /* CategoriesMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesMessage.swift; sourceTree = "<group>"; };
+		0AE5797F23037A6600CD2AEE /* CategoriesCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCommand.swift; sourceTree = "<group>"; };
+		0AE5798323037C7400CD2AEE /* QuoteEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteEnvironment.swift; sourceTree = "<group>"; };
+		0AE5798523037C9C00CD2AEE /* ImageEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEnvironment.swift; sourceTree = "<group>"; };
+		0AE579892303833700CD2AEE /* CategoriesMessageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesMessageTest.swift; sourceTree = "<group>"; };
 		0AF51EAB22FD0C07007C5F12 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,23 +123,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A5D6AFB22FA401600FF5B83 /* Quote Service */ = {
+		0A5D6AFB22FA401600FF5B83 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				0A5D6AFC22FA404D00FF5B83 /* QuoteService.swift */,
 				0A5D6B0C22FA448000FF5B83 /* TheySaidQuoteService.swift */,
 			);
-			path = "Quote Service";
+			path = Service;
 			sourceTree = "<group>";
 		};
 		0A5D6B0122FA429A00FF5B83 /* Quotes */ = {
 			isa = PBXGroup;
 			children = (
-				0A5D6AFF22FA41F100FF5B83 /* Quote.swift */,
-				0A9A8E3E22FAA23800FE7FFC /* QuoteCategory.swift */,
-				0A5D6B0622FA437900FF5B83 /* QuoteCommand.swift */,
-				0A5D6B0222FA42C400FF5B83 /* QuoteMessage.swift */,
-				0A5D6AFB22FA401600FF5B83 /* Quote Service */,
+				0AE5798323037C7400CD2AEE /* QuoteEnvironment.swift */,
+				0AE5798123037AC400CD2AEE /* Categories */,
+				0AE5798223037AD500CD2AEE /* Quotes */,
+				0A5D6AFB22FA401600FF5B83 /* Service */,
 			);
 			path = Quotes;
 			sourceTree = "<group>";
@@ -170,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				0A8FAC3922FF9129001B07D0 /* QuoteMessageTests.swift */,
+				0AE579892303833700CD2AEE /* CategoriesMessageTest.swift */,
 			);
 			path = Quotes;
 			sourceTree = "<group>";
@@ -177,9 +187,10 @@
 		0A9A8E4422FAC0E000FE7FFC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				0AC78C1922FD130F00FA7EB7 /* Image Service */,
-				0A9A8E4522FAC10100FE7FFC /* ImageMessage.swift */,
 				0A9A8E4722FAC26800FE7FFC /* ImageCommand.swift */,
+				0AE5798523037C9C00CD2AEE /* ImageEnvironment.swift */,
+				0A9A8E4522FAC10100FE7FFC /* ImageMessage.swift */,
+				0AC78C1922FD130F00FA7EB7 /* Image Service */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -259,6 +270,26 @@
 				0ACBCB2022FE9E0D00BEBB0C /* URLSessionDataTask+Cancellable.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0AE5798123037AC400CD2AEE /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0A9A8E3E22FAA23800FE7FFC /* QuoteCategory.swift */,
+				0AE5797F23037A6600CD2AEE /* CategoriesCommand.swift */,
+				0AE5797D2302D57700CD2AEE /* CategoriesMessage.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		0AE5798223037AD500CD2AEE /* Quotes */ = {
+			isa = PBXGroup;
+			children = (
+				0A5D6AFF22FA41F100FF5B83 /* Quote.swift */,
+				0A5D6B0622FA437900FF5B83 /* QuoteCommand.swift */,
+				0A5D6B0222FA42C400FF5B83 /* QuoteMessage.swift */,
+			);
+			path = Quotes;
 			sourceTree = "<group>";
 		};
 		0AF51EA822FCFC5A007C5F12 /* Frameworks */ = {
@@ -376,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AE5798A2303833700CD2AEE /* CategoriesMessageTest.swift in Sources */,
 				0A8FAC3A22FF9129001B07D0 /* QuoteMessageTests.swift in Sources */,
 				0A8FAC3C22FF91BB001B07D0 /* TestSupport.swift in Sources */,
 			);
@@ -403,12 +435,16 @@
 				0A1F34A222FA88A200264A6D /* QuoteView.swift in Sources */,
 				0A5D6B0022FA41F100FF5B83 /* Quote.swift in Sources */,
 				0A5D6B0522FA42EF00FF5B83 /* ApplicationMessage.swift in Sources */,
+				0AE5798423037C7400CD2AEE /* QuoteEnvironment.swift in Sources */,
 				0A5D6AFD22FA404D00FF5B83 /* QuoteService.swift in Sources */,
 				0AC78C1B22FD138A00FA7EB7 /* ImageService.swift in Sources */,
 				0A9A8E4A22FB8A9F00FE7FFC /* Resource.swift in Sources */,
+				0AE5797E2302D57700CD2AEE /* CategoriesMessage.swift in Sources */,
 				0A5D6B0722FA437900FF5B83 /* QuoteCommand.swift in Sources */,
 				0AC78C1F22FD548900FA7EB7 /* MessageLogger.swift in Sources */,
 				0A5D6B0D22FA448000FF5B83 /* TheySaidQuoteService.swift in Sources */,
+				0AE5798623037C9C00CD2AEE /* ImageEnvironment.swift in Sources */,
+				0AE5798023037A6600CD2AEE /* CategoriesCommand.swift in Sources */,
 				0A9A8E4122FAA80D00FE7FFC /* CardView.swift in Sources */,
 				0A5D6B1422FA6F7900FF5B83 /* CategoryList.swift in Sources */,
 				0A9A8E4822FAC26800FE7FFC /* ImageCommand.swift in Sources */,
@@ -669,7 +705,7 @@
 			repositoryURL = "https://github.com/weegigs/swiftea.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.13.0;
+				minimumVersion = 0.14.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

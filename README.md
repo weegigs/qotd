@@ -13,6 +13,7 @@ QOTD uses the free API from [theysaidso.com](https://theysaidso.com/api/). The f
 ## Examples
 
 - [X] Creating a `Program` and `Model` with persistence support
+- [X] Composing `Message`s, `Commands` and `Environments`
 - [X] Using `Message`s to drive `View` updates
 - [X] Service access via `Command`s
 - [X] Remote images with stateless components
@@ -23,7 +24,7 @@ QOTD uses the free API from [theysaidso.com](https://theysaidso.com/api/). The f
 - [ ] Unit Test example for Commands
 - [ ] Unit Test example for Views
 
->At the time of writing a bug is `SwiftUI` is preventing the `onDisappear` method
+> ⚠️ At the time of writing a bug is `SwiftUI` is preventing the `onDisappear` method
 being called. This prevents the various cancel messages from being fired.
 
 If there are any other examples you'd like to see, please let me know.

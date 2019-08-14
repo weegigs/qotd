@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-typealias ApplicationEnvironment = QuoteServiceContainer & ImageServiceContainer
+typealias ApplicationEnvironment = QuoteEnvironment & ImageEnvironment
 
 enum ApplicationEnvironments {
   case live

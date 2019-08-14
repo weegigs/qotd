@@ -27,192 +27,76 @@ import Combine
 import SwifTEA
 
 class QuoteMessageTests: XCTestCase {
-  var model: ApplicationModel!
+  var model: ApplicationModel.Quotes = [:]
 
   override func setUp() {
-    model = ApplicationModel()
+    model = [:]
   }
 
   override func tearDown() {
-    model = nil
+    model = [:]
   }
 
-  func testHandleCategoriesLoading() {
-    let task = TestCancelable()
-
-    _ = quoteMessageHandler.run(
-      state: &model,
-      message: QuoteMessage.categoriesLoading(task: task)
-    )
-
-    switch model.categories {
-    case .loading:
-      XCTAssertFalse(task.cancelled)
-    default:
-      XCTFail("categories in unexpected state \(model.categories)")
-    }
-  }
-
-  func testHandleCategoriesLoadingFailure() {
-    _ = quoteMessageHandler.run(
-      state: &model,
-      message: QuoteMessage.categoriesLoadingFailed(error: .apiError("test"))
-    )
-
-    switch model.categories {
-    case let .failed(message):
-      XCTAssertEqual(message, "test")
-    default:
-      XCTFail("categories in unexpected state \(model.categories)")
-    }
-  }
-
-  func testHandleCategoriesLoadingCancelled() {
-    let task = TestCancelable()
-    model.categories = .loading(task: task)
-
-    _ = quoteMessageHandler.run(
-      state: &model,
-      message: QuoteMessage.categoriesLoadingCancelled
-    )
-
-    switch model.categories {
-    case .placeholder:
-      XCTAssertTrue(task.cancelled)
-    default:
-      XCTFail("categories in unexpected state \(model.categories)")
-    }
-  }
-
-  func testCancelShouldNotAffectAvailable() {
-    model.categories = .available([])
-
-    _ = quoteMessageHandler.run(
-      state: &model,
-      message: QuoteMessage.categoriesLoadingCancelled
-    )
-
-    switch model.categories {
-    case .available:
-      break
-    default:
-      XCTFail("categories in unexpected state \(model.categories)")
-    }
-  }
-
-  func testCancelShouldNotAffectFailed() {
-    model.categories = .failed(message: "test")
-
-    _ = quoteMessageHandler.run(
-      state: &model,
-      message: QuoteMessage.categoriesLoadingCancelled
-    )
-
-    switch model.categories {
-    case .failed:
-      break
-    default:
-      XCTFail("categories in unexpected state \(model.categories)")
-    }
-  }
-
-  func testHandleCategoriesLoaded() {
-    let categories = [
-      QuoteCategory(id: "b", title: "B"),
-      QuoteCategory(id: "a", title: "A"),
-    ]
-    _ = quoteMessageHandler.run(
-      state: &model,
-      message: QuoteMessage.categoriesLoaded(categories: categories)
-    )
-
-    switch model.categories {
-    case let .available(update):
-      XCTAssertEqual(update.map { $0.id }.sorted(), categories.map { $0.id }.sorted())
-    default:
-      XCTFail("categories in unexpected state \(model.categories)")
-    }
-  }
-
-  func testCategoriesLoadedSortsByTitle() {
-    let categories = [
-      QuoteCategory(id: "b", title: "B"),
-      QuoteCategory(id: "a", title: "A"),
-    ]
-    _ = quoteMessageHandler.run(
-      state: &model,
-      message: QuoteMessage.categoriesLoaded(categories: categories)
-    )
-
-    switch model.categories {
-    case let .available(update):
-      XCTAssertEqual("A", update.first!.title)
-      XCTAssertEqual("B", update.last!.title)
-    default:
-      XCTFail("categories in unexpected state \(model.categories)")
-    }
-  }
-  
   func testHandleQuoteLoading() {
     let task = TestCancelable()
-    
+
     _ = quoteMessageHandler.run(
       state: &model,
       message: QuoteMessage.quoteLoading(category: "test", task: task)
     )
-    
-    switch model.quotes["test"] {
+
+    switch model["test"] {
     case .loading:
       XCTAssertFalse(task.cancelled)
     default:
-      XCTFail("quote in unexpected state \(model.categories)")
+      XCTFail("quote in unexpected state \(model)")
     }
   }
-  
+
   func testQuoteLoadingFailure() {
     _ = quoteMessageHandler.run(
       state: &model,
       message: QuoteMessage.quoteLoadingFailed(category: "test", error: .apiError("test"))
     )
-    
-    switch model.quotes["test"] {
+
+    switch model["test"] {
     case let .failed(message):
       XCTAssertEqual(message, "test")
     default:
-      XCTFail("quote in unexpected state \(model.categories)")
+      XCTFail("quote in unexpected state \(model)")
     }
   }
-  
+
   func testQuoteLoadingCanBeCancelled() {
     let task = TestCancelable()
-    model.quotes["test"] = .loading(task: task)
-    
+    model["test"] = .loading(task: task)
+
     _ = quoteMessageHandler.run(
       state: &model,
       message: QuoteMessage.quoteLoadingCancelled(category: "test")
     )
-    
-    switch model.quotes["test"] {
+
+    switch model["test"] {
     case .placeholder:
       XCTAssertTrue(task.cancelled)
     default:
-      XCTFail("quote in unexpected state \(model.categories)")
+      XCTFail("quote in unexpected state \(model)")
     }
   }
-  
+
   func testQuoteLoadingDoesntCancelAvailable() {
-    model.quotes["test"] = .available(Quote(id: "test", quote: "tests are good", author: "test-mc-test", background: ""))
-    
+    model["test"] = .available(Quote(id: "test", quote: "tests are good", author: "test-mc-test", background: ""))
+
     _ = quoteMessageHandler.run(
       state: &model,
       message: QuoteMessage.quoteLoadingCancelled(category: "test")
     )
-    
-    switch model.quotes["test"] {
+
+    switch model["test"] {
     case let .available(quote):
       XCTAssertEqual(quote.quote, "tests are good")
     default:
-      XCTFail("quote in unexpected state \(model.categories)")
+      XCTFail("quote in unexpected state \(model)")
     }
   }
 
@@ -221,13 +105,12 @@ class QuoteMessageTests: XCTestCase {
       state: &model,
       message: QuoteMessage.quoteLoaded(category: "test", quote: Quote(id: "test", quote: "tests are good", author: "test-mc-test", background: ""))
     )
-    
-    switch model.quotes["test"] {
+
+    switch model["test"] {
     case let .available(quote):
       XCTAssertEqual(quote.quote, "tests are good")
     default:
-      XCTFail("quote in unexpected state \(model.categories)")
+      XCTFail("quote in unexpected state \(model)")
     }
   }
-
 }

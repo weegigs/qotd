@@ -22,54 +22,49 @@
 
 import Combine
 import SwifTEA
-import UIKit
 
-enum ImageMessage {
-  case loading(location: String, task: Cancellable)
-  case cancelled(location: String)
-  case loaded(location: String, image: UIImage)
-  case failed(location: String, message: String)
+enum QuoteMessage {
+  case quoteLoading(category: String, task: Cancellable)
+  case quoteLoadingCancelled(category: String)
+  case quoteLoadingFailed(category: String, error: QuoteServiceError)
+  case quoteLoaded(category: String, quote: Quote)
 }
 
-typealias ImageMessageHandler = MessageHandler<ImageEnvironment, ApplicationModel.Cache.Images, ImageMessage>
+typealias QuoteMessageHandler = MessageHandler<QuoteEnvironment, ApplicationModel.Quotes, QuoteMessage>
 
-private let loading: ImageMessageHandler = .reducer { state, message in
+private let quoteLoading: QuoteMessageHandler = .reducer { state, message in
   guard
-    case let .loading(location, task) = message
+    case let .quoteLoading(category, task) = message
   else { return }
 
-  state[location] = .loading(task: task)
+  state[category] = .loading(task: task)
 }
 
-private let cancelled: ImageMessageHandler = .reducer { state, message in
+private let quoteLoadingCancelled: QuoteMessageHandler = .reducer { state, message in
   guard
-    case let .cancelled(location) = message,
-    let resource = state[location]
+    case let .quoteLoadingCancelled(category) = message,
+    let resource = state[category],
+    case let .loading(task) = resource
   else { return }
 
-  switch resource {
-  case let .loading(task):
-    task.cancel()
-    state[location] = .placeholder
-  default:
-    break
-  }
+  task.cancel()
+  state[category] = .placeholder
 }
 
-private let loaded: ImageMessageHandler = .reducer { state, message in
+private let quoteLoadingFailed: QuoteMessageHandler = .reducer { state, message in
   guard
-    case let .loaded(location, image) = message
+    case let .quoteLoadingFailed(category, error) = message
   else { return }
 
-  state[location] = .available(image)
+  state[category] = .failed(message: error.description)
 }
 
-private let failed: ImageMessageHandler = .reducer { state, message in
+private let quoteLoaded: QuoteMessageHandler = .reducer { state, message in
   guard
-    case let .failed(location, details) = message
+    case let .quoteLoaded(category, quote) = message
   else { return }
 
-  state[location] = .failed(message: details)
+  state[category] = .available(quote)
 }
 
-let imageMessageHandler = loading <> cancelled <> loaded <> failed
+let quoteMessageHandler = quoteLoading <> quoteLoadingCancelled <> quoteLoadingFailed <> quoteLoaded
