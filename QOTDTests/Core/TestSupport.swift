@@ -49,8 +49,8 @@ final class TestImageService: ImageService {
 
   private let load: Load
 
-  func load(url: URL, forfil: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
-    load(url, forfil)
+  func load(url: URL, fulfill: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
+    load(url, fulfill)
   }
 
   init(load: @escaping Load = DefaultLoad) {
@@ -67,23 +67,27 @@ final class TestCancelable: Cancellable {
 }
 
 struct TestQuoteService: QuoteService {
-  typealias LoadCategories = (@escaping (Result<[QuoteCategory], QuoteServiceError>) -> Void) -> Cancellable
+  typealias LoadCategories = (@escaping (Result<[QuoteCategory], QuoteServiceError>) -> Void) -> Void
   typealias LoadQOTD = (String, @escaping (Result<Quote, QuoteServiceError>) -> Void) -> Cancellable
 
   static let Defaults: (categories: LoadCategories, qotd: LoadQOTD) = (
-    categories: { $0(.failure(.invalidEndpoint)); return TestCancelable() },
+    categories: { $0(.failure(.invalidEndpoint)) },
     qotd: { $1(.failure(.invalidEndpoint)); return TestCancelable() }
   )
 
   private let categories: LoadCategories
   private let qotd: LoadQOTD
 
-  func categories(forfil: @escaping (Result<[QuoteCategory], QuoteServiceError>) -> Void) -> Cancellable {
-    categories(forfil)
+  func categories(fulfill: @escaping (Result<[QuoteCategory], QuoteServiceError>) -> Void) -> Cancellable {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      self.categories(fulfill)
+    }
+
+    return TestCancelable()
   }
 
-  func qod(category: String, forfil: @escaping (Result<Quote, QuoteServiceError>) -> Void) -> Cancellable {
-    qotd(category, forfil)
+  func qod(category: String, fulfill: @escaping (Result<Quote, QuoteServiceError>) -> Void) -> Cancellable {
+    qotd(category, fulfill)
   }
 
   init(

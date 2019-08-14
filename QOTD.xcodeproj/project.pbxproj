@@ -46,6 +46,7 @@
 		0AE5798423037C7400CD2AEE /* QuoteEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5798323037C7400CD2AEE /* QuoteEnvironment.swift */; };
 		0AE5798623037C9C00CD2AEE /* ImageEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE5798523037C9C00CD2AEE /* ImageEnvironment.swift */; };
 		0AE5798A2303833700CD2AEE /* CategoriesMessageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE579892303833700CD2AEE /* CategoriesMessageTest.swift */; };
+		0AE579C6230423AA00CD2AEE /* CategoriesCommandTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE579C5230423AA00CD2AEE /* CategoriesCommandTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		0AE5798323037C7400CD2AEE /* QuoteEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteEnvironment.swift; sourceTree = "<group>"; };
 		0AE5798523037C9C00CD2AEE /* ImageEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEnvironment.swift; sourceTree = "<group>"; };
 		0AE579892303833700CD2AEE /* CategoriesMessageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesMessageTest.swift; sourceTree = "<group>"; };
+		0AE579C5230423AA00CD2AEE /* CategoriesCommandTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCommandTest.swift; sourceTree = "<group>"; };
 		0AF51EAB22FD0C07007C5F12 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +182,7 @@
 			children = (
 				0A8FAC3922FF9129001B07D0 /* QuoteMessageTests.swift */,
 				0AE579892303833700CD2AEE /* CategoriesMessageTest.swift */,
+				0AE579C5230423AA00CD2AEE /* CategoriesCommandTest.swift */,
 			);
 			path = Quotes;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				0AE5798A2303833700CD2AEE /* CategoriesMessageTest.swift in Sources */,
 				0A8FAC3A22FF9129001B07D0 /* QuoteMessageTests.swift in Sources */,
 				0A8FAC3C22FF91BB001B07D0 /* TestSupport.swift in Sources */,
+				0AE579C6230423AA00CD2AEE /* CategoriesCommandTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

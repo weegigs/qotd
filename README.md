@@ -21,7 +21,7 @@ QOTD uses the free API from [theysaidso.com](https://theysaidso.com/api/). The f
 - [X] Cancelling work when a `View` disappears
 - [ ] Control interactions
 - [X] Unit Test example for MessageHandlers
-- [ ] Unit Test example for Commands
+- [X] Unit Test example for Commands
 - [ ] Unit Test example for Views
 
 > ⚠️ At the time of writing a bug is `SwiftUI` is preventing the `onDisappear` method
