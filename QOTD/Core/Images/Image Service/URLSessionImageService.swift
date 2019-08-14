@@ -31,35 +31,35 @@ final class URLSessionImageService: ImageService {
     self.session = session
   }
 
-  func load(url: URL, forfil: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
+  func load(url: URL, fulfill: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
     let task = URLSession.shared.dataTask(with: url) { (data, response, error) -> Void in
       if let error = error {
-        return forfil(.failure(.unknownError(error: error)))
+        return fulfill(.failure(.unknownError(error: error)))
       }
 
       guard
         let response = response as? HTTPURLResponse
       else {
-        return forfil(.failure(.internalError(message: "unexpected result type")))
+        return fulfill(.failure(.internalError(message: "unexpected result type")))
       }
 
       guard
         let data = data
       else {
-        return forfil(.failure(.invalidResponse(message: "data unavailable")))
+        return fulfill(.failure(.invalidResponse(message: "data unavailable")))
       }
 
       guard
         200 ..< 299 ~= response.statusCode
       else {
-        return forfil(.failure(.invalidResponse(message: "invalid response code: \(response.statusCode)")))
+        return fulfill(.failure(.invalidResponse(message: "invalid response code: \(response.statusCode)")))
       }
 
       guard let image = UIImage(data: data) else {
-        return forfil(.failure(.invalidResponse(message: "failed to decode image")))
+        return fulfill(.failure(.invalidResponse(message: "failed to decode image")))
       }
 
-      forfil(.success(image))
+      fulfill(.success(image))
     }
 
     task.resume()

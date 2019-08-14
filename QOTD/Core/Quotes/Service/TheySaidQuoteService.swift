@@ -75,15 +75,15 @@ final class TheySaidQuoteService: QuoteService {
   let base = URL(string: "https://quotes.rest/")!
   let decoder = JSONDecoder()
 
-  func categories(forfil: @escaping (Result<[QuoteCategory], QuoteServiceError>) -> Void) -> Cancellable {
+  func categories(fulfill: @escaping (Result<[QuoteCategory], QuoteServiceError>) -> Void) -> Cancellable {
     return fetch(CatogoriesResponse.self, from: .categories) {
-      forfil($0.map { $0.contents.categories.map { QuoteCategory(id: $0.key, title: $0.value) } })
+      fulfill($0.map { $0.contents.categories.map { QuoteCategory(id: $0.key, title: $0.value) } })
     }
   }
 
-  func qod(category: String, forfil: @escaping (Result<Quote, QuoteServiceError>) -> Void) -> Cancellable {
+  func qod(category: String, fulfill: @escaping (Result<Quote, QuoteServiceError>) -> Void) -> Cancellable {
     return fetch(QuoteResponse.self, from: .qod(category: category)) {
-      forfil($0.flatMap {
+      fulfill($0.flatMap {
         guard let quote = $0.contents.quotes.first else {
           return .failure(.invalidResponse)
         }
@@ -93,11 +93,11 @@ final class TheySaidQuoteService: QuoteService {
     }
   }
 
-  private func fetch<T: Decodable>(_ type: T.Type, from route: Route, forfil: @escaping (Result<T, QuoteServiceError>) -> Void) -> Cancellable {
+  private func fetch<T: Decodable>(_ type: T.Type, from route: Route, fulfill: @escaping (Result<T, QuoteServiceError>) -> Void) -> Cancellable {
     guard
       var location = URLComponents(url: base.appendingPathComponent(route.path), resolvingAgainstBaseURL: true)
     else {
-      forfil(.failure(.invalidEndpoint))
+      fulfill(.failure(.invalidEndpoint))
       return AnyCancellable {}
     }
 
@@ -105,7 +105,7 @@ final class TheySaidQuoteService: QuoteService {
     guard
       let url = location.url
     else {
-      forfil(.failure(.invalidEndpoint))
+      fulfill(.failure(.invalidEndpoint))
       return AnyCancellable {}
     }
 
@@ -114,36 +114,36 @@ final class TheySaidQuoteService: QuoteService {
 
     let task = session.dataTask(with: request) { (data, response, error) -> Void in
       if let failure = error {
-        return forfil(.failure(.unexpectedFailure(failure)))
+        return fulfill(.failure(.unexpectedFailure(failure)))
       }
 
       guard
         let response = response as? HTTPURLResponse
       else {
-        return forfil(.failure(.invalidResponse))
+        return fulfill(.failure(.invalidResponse))
       }
 
       guard
         let data = data
       else {
-        return forfil(.failure(.invalidResponse))
+        return fulfill(.failure(.invalidResponse))
       }
 
       guard
         200 ..< 299 ~= response.statusCode
       else {
         guard let message = try? self.decoder.decode(ErrorResponse.self, from: data) else {
-          return forfil(.failure(.invalidStatusCode(response.statusCode)))
+          return fulfill(.failure(.invalidStatusCode(response.statusCode)))
         }
 
-        return forfil(.failure(.apiError(message.error.message)))
+        return fulfill(.failure(.apiError(message.error.message)))
       }
 
       do {
         let value = try self.decoder.decode(type, from: data)
-        return forfil(.success(value))
+        return fulfill(.success(value))
       } catch {
-        return forfil(.failure(.decodeError(error)))
+        return fulfill(.failure(.decodeError(error)))
       }
     }
 

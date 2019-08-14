@@ -49,16 +49,16 @@ enum ImageServiceError: Error, CustomStringConvertible {
 }
 
 protocol ImageService {
-  func load(url: URL, forfil: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable
+  func load(url: URL, fulfill: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable
 }
 
 extension ImageService {
-  func load(url location: String, forfil: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
+  func load(url location: String, fulfill: @escaping (Result<UIImage, ImageServiceError>) -> Void) -> Cancellable {
     guard let url = URL(string: location) else {
-      forfil(.failure(.invalidURL(url: location)))
+      fulfill(.failure(.invalidURL(url: location)))
       return AnyCancellable {}
     }
 
-    return load(url: url, forfil: forfil)
+    return load(url: url, fulfill: fulfill)
   }
 }

@@ -51,6 +51,6 @@ public enum QuoteServiceError: Error, CustomStringConvertible {
 }
 
 protocol QuoteService {
-  func categories(forfil: @escaping (Result<[QuoteCategory], QuoteServiceError>) -> Void) -> Cancellable
-  func qod(category: String, forfil: @escaping (Result<Quote, QuoteServiceError>) -> Void) -> Cancellable
+  func categories(fulfill: @escaping (Result<[QuoteCategory], QuoteServiceError>) -> Void) -> Cancellable
+  func qod(category: String, fulfill: @escaping (Result<Quote, QuoteServiceError>) -> Void) -> Cancellable
 }
