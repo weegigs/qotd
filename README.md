@@ -2,6 +2,8 @@
 
 ![Screenshot](ipad-screenshot.png)
 
+[![Build status](https://badge.buildkite.com/2a2f73ef8993f2d98b2f6a5c8786c7136431e8f72f4b682549.svg)](https://buildkite.com/weegigs/qotd)
+
 An example app using SwiftUI, SwifTEA and SwifTEAUI.
 
 ## Overview
